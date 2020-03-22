@@ -4,6 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
+import java.util.Arrays;
+
 /**
  * @Auther: FYJ
  * @Date: 2020/3/9 21:44
@@ -19,10 +21,11 @@ public class DemoMain {
         LoggerService loggerService=context.getBean(LoggerService.class);
         cacheService.say();
         loggerService.print();
+        String[] names=context.getBeanDefinitionNames();
+        Arrays.stream(names).forEach(System.out::println);
     }
 
 
-    //SpringFactoriesLoader
 
     /**
      * SpringBoot里面是怎么实现自动装配的？
@@ -31,6 +34,12 @@ public class DemoMain {
      *
      * 这是因为在引入依赖的时候，在对应项目的resource目录META-INF路径下的spring.factories文件中 申明了需要自动装配
      * 的类。
+     *
+     *
+     */
+
+    /** 注解：@EnableAutoConfiguration中
+     *  @AutoConfigurationPackage: 让包中的类以及子包中的类能够被扫描到Spring中
      *
      *
      *
